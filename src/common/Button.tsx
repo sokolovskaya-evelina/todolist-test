@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from "./Button.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 type ButtonType = {
     icon: IconProp
-    placeholder: string
+    placeholder: string,
+    setText: (e: string) => void
+    onClick: () => void
+    value: string
 }
 
-const Button: React.FC<ButtonType> = ({icon, placeholder}) => {
+const Button: React.FC<ButtonType> = ({icon, placeholder, setText, onClick, value}) => {
     return (
         <div>
             <div className={styles.styleInput}>
-                <input className={styles.input} type="text" placeholder={placeholder}/>
-                <button className={styles.button} type="submit"><FontAwesomeIcon icon={icon}/></button>
+                <input value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)} className={styles.input}
+                       type="text" placeholder={placeholder}/>
+                <button className={styles.button} onClick={onClick}><FontAwesomeIcon icon={icon}/></button>
             </div>
         </div>
     );
