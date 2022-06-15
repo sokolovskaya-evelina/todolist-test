@@ -1,9 +1,20 @@
+body {
+  background-color: #1B262C;
+}
+
+html { box-sizing: border-box; font-size: 10px; }
+*, *:before, *:after { box-sizing: inherit; }
+body, ul, li  { margin: 0; padding: 0; }
+li { list-style: none; }
+p, h1, h2, h3, h4, h5, h6 { margin-top: 0; }
+a { text-decoration: none; }
+input { border-style: none; background: transparent; outline: none; }
+button { padding: 0; background: none; border: none; outline: none; }
+
 .header {
-  color: aliceblue;
   width: 100%;
-  height: 60px;
-  padding: 0 20px 0 20px;
-  background-color: #4f95ff;
+  height: 100px;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  background-color:#3282B8;
 }
