@@ -1,0 +1,33 @@
+@import "../../common/styles/variables";
+
+.wrapper {
+  width: 90%;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fit, 353px);
+  justify-items: stretch;
+  justify-content: space-between;
+
+
+  .taskCard {
+    font-size: 20px;
+    width: 353px;
+    font-family: sans-serif;
+    color: $mainColor;
+    background-color: $fourthColor;
+    border-radius: 10px;
+    height: 60px;
+    box-shadow:  2px 2px 16px rgba(187, 225, 250, 0.2);
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+      margin-left: 6px;
+    }
+  }
+}
+
+

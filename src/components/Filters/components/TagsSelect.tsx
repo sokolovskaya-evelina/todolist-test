@@ -11,17 +11,17 @@ const plusIcon: IconLookup = {prefix: 'fas', iconName: 'plus'}
 
 
 const TagsSelect = () => {
-    const [open, setOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div>
             <div className={styles.styleInput}>
-                <input className={styles.input} type="text" placeholder="Введите название тега" onClick={() => setOpen(!open)}/>
+                <input className={styles.input} type="text" placeholder="Введите название тега" onClick={() => setIsOpen(!isOpen)}/>
                 <button className={styles.button}><FontAwesomeIcon icon={plusIcon}/></button>
-                <button onClick={() => setOpen(!open)} className={styles.button}><FontAwesomeIcon
-                    icon={open ? upIcon : downIcon}/>
+                <button onClick={() => setIsOpen(!isOpen)} className={styles.button}><FontAwesomeIcon
+                    icon={isOpen ? upIcon : downIcon}/>
                 </button>
-                {open && (
+                {isOpen && (
                     <ul className={styles.tagsList}>
                         <li>Alabama</li>
                         <li>Alaska</li>

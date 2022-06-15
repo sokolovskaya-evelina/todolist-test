@@ -18,3 +18,10 @@ button { padding: 0; background: none; border: none; outline: none; }
   justify-content: center;
   background-color:#3282B8;
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
