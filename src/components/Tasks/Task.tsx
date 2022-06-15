@@ -3,7 +3,8 @@ import React, {useState} from 'react';
 import {TaskType} from "../../App";
 import styles from './Tasks.module.scss'
 import {IconLookup} from "@fortawesome/fontawesome-svg-core";
-import {updateTaskText} from "../../stateManagement/effector";
+import {deleteTask, updateTaskText} from "../../stateManagement/effector";
+import Modal from "../../common/Modal";
 
 
 interface ITask {
@@ -19,6 +20,7 @@ const tagIcon: IconLookup = {prefix: 'fas', iconName: 'tag'}
 
 const Task: React.FC<ITask> = ({task}) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [isOpenModal, setOpenModal] = useState(false)
     const [text, setText] = useState<string>(task.text)
 
     return (
@@ -46,7 +48,19 @@ const Task: React.FC<ITask> = ({task}) => {
                     setIsEditing(true)
                 }}/>}
                 <FontAwesomeIcon icon={tagIcon} className={styles.icon}/>
-                <FontAwesomeIcon icon={trashIcon} color="#FF5151" className={styles.icon}/>
+                <FontAwesomeIcon icon={trashIcon} color="#FF5151" className={styles.icon} onClick={() => setOpenModal(true)}/>
+                <Modal isOpenModal={isOpenModal} setOpenModal={setOpenModal}>
+                    <div className={styles.modalContainer}>
+                        Вы действительно хотите удалить задачу?
+                        <div className={styles.buttonContainer}>
+                            <button className={`${styles.btn} ${styles.yes}`} onClick={() => {
+                                deleteTask(task.id)
+                                setOpenModal(false)
+                            }}>Да</button>
+                            <button className={`${styles.btn} ${styles.no}`} onClick={() => setOpenModal(false)}>Нет</button>
+                        </div>
+                    </div>
+                </Modal>
             </div>
 
         </div>

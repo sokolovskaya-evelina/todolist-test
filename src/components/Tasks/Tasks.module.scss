@@ -17,7 +17,7 @@
     background-color: $fourthColor;
     border-radius: 10px;
     height: 60px;
-    box-shadow:  2px 2px 16px rgba(187, 225, 250, 0.2);
+    box-shadow: 2px 2px 16px rgba(187, 225, 250, 0.2);
     padding: 10px 20px;
     margin-bottom: 20px;
     display: flex;
@@ -26,6 +26,44 @@
 
     .icon {
       margin-left: 6px;
+    }
+  }
+
+  .modalContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+    .buttonContainer {
+      margin-top: 40px;
+      .btn {
+        font-size: 24px;
+        vertical-align: middle;
+        transition: color .25s;
+        margin-right: 6px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        width: 60px;
+
+        &.yes {
+          margin-right: 50px;
+          background-color: $thirdColor;
+          color: $fourthColor;
+          &:hover {
+            background-color: $secondaryColor;
+          }
+        }
+
+        &.no {
+          margin-right: 50px;
+          background-color: #FF5959;
+          color: $fourthColor;
+          &:hover {
+            background-color: #FF5151;
+          }
+        }
+      }
     }
   }
 }

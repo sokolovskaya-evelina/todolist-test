@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './App.module.scss'
 import Filters from "./components/Filters/Filters";
 import Tasks from "./components/Tasks/Tasks";
-import {$tasks} from "./stateManagement/effector";
+import {$store, storeType} from "./stateManagement/effector";
 import {useStore} from "effector-react";
 
 export type TaskType = {
@@ -12,7 +12,7 @@ export type TaskType = {
 }
 
 const App = () => {
-    const tasks = useStore($tasks);
+    const store = useStore<storeType>($store);
 
     return (
         <>
@@ -20,7 +20,7 @@ const App = () => {
                 <Filters/>
             </div>
             <div className={styles.container}>
-                <Tasks tasks={tasks}/>
+                <Tasks tasks={store.tasks}/>
             </div>
 
         </>
