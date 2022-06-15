@@ -24,7 +24,8 @@ export type storeType = {
 }
 
 export const $store = createStore<storeType>({
-    tasks: [{id: v1(), text: 'Задача 1', tags: ['1', '2']},
+    tasks: [
+        {id: v1(), text: 'Задача 1', tags: ['1', '2']},
         {id: v1(), text: 'Задача 2', tags: ['1']},
         {id: v1(), text: 'Задача 3', tags: ['2', '3']}
     ],
