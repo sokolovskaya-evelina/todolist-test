@@ -1,30 +1,38 @@
 import React from 'react';
 import styles from './App.module.scss'
-import Filters from "./components/Filters/Filters";
-import Tasks from "./components/Tasks/Tasks";
 import {$store, storeType} from "./stateManagement/effector";
 import {useStore} from "effector-react";
+import AddTaskButton from "./components/AddTaskButton/AddTaskButton";
+import Tags from "./components/Tags/Tags";
+import SearchByTagsInput from "./components/SearchByTagsInput/SearchByTagsInput";
+import Tasks from "./components/Tasks/Tasks";
 
-export type TaskType = {
-    id: string,
-    text: string,
-    tags: Array<string>
-}
 
 const App = () => {
-    const store = useStore<storeType>($store);
+    const tasks = useStore<storeType>($store).filteredTasks;
 
     return (
         <>
-            <div className={styles.header}>
-                <Filters/>
-            </div>
-            <div className={styles.container}>
-                <Tasks tasks={store.tasks}/>
-            </div>
-
+            <header className={styles.headerContainer}>
+                <div className={styles.wrapper}>
+                    <SearchByTagsInput/>
+                </div>
+            </header>
+            <main className={styles.mainContainer}>
+                <div className={styles.wrapper}>
+                    <div className={styles.tagsContainer}>
+                        <Tags/>
+                    </div>
+                    <div className={styles.tasksContainer}>
+                        {tasks.length !== 0
+                            ? <Tasks/>
+                            : <div className={styles.empty}>Задачи не найдены</div>
+                        }
+                    </div>
+                </div>
+                <AddTaskButton/>
+            </main>
         </>
-
     );
 };
 

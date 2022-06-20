@@ -1,0 +1,49 @@
+@import "../../common/styles/mixins";
+@import "../../common/styles/variables";
+
+.addBtn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  bottom: 25px;
+  right: 25px;
+  position: fixed;
+  background-color: $thirdColor;
+  padding: 7px;
+  border-radius: 50%;
+  font-size: 30px;
+
+  &::after {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px 8px 0 8px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    color: $fourthColor;
+    content: attr(data-tooltip);
+    margin-top: -35px;
+    margin-left: -145px;
+    opacity: 0;
+    padding: 3px 7px;
+    position: absolute;
+    visibility: hidden;
+
+    transition: all 0.4s ease-in-out;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.title {
+  color: $mainColor;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+

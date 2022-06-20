@@ -1,0 +1,58 @@
+@import "../../common/styles/variables";
+
+@keyframes gradient {
+  0% {
+    background-position: 0 0
+  }
+  100% {
+    background-position: 100% 0
+  }
+}
+
+.styleInput {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 2px;
+  padding: 0 15px 10px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0 0;
+    background: linear-gradient(to right, #37E2D5, #590696, #C70A80, #FBCB0A, #37E2D5, #590696);
+    background-size: 500% auto;
+    animation: gradient 3s linear infinite;
+  }
+
+  .input {
+    flex-grow: 1;
+    color: $secondaryColor;
+    font-size: 20px;
+    vertical-align: middle;
+
+    &::-webkit-input-placeholder {
+      color: $fourthColor;
+    }
+  }
+
+  .button {
+    color: $fourthColor;
+    font-size: 24px;
+    vertical-align: middle;
+    transition: color .25s;
+    margin-right: 6px;
+
+    &:hover {
+      color: $secondaryColor;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../common/styles/variables";
+
+.addTagBtn {
+  height: auto;
+  margin-right: 5px;
+  padding: 5px;
+  border: 2px dashed $fourthColor;
+  border-radius: 10px;
+  color: $fourthColor;
+  margin-bottom: 5px;
+}

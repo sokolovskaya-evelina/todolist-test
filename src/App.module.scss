@@ -1,27 +1,101 @@
+@import "common/styles/variables";
+@import "common/styles/mixins";
+
 body {
-  background-color: #1B262C;
+  font-family: sans-serif;
+  background-color: $mainColor;
+  font-size: 16px;
 }
 
-html { box-sizing: border-box; font-size: 10px; }
-*, *:before, *:after { box-sizing: inherit; }
-body, ul, li  { margin: 0; padding: 0; }
-li { list-style: none; }
-p, h1, h2, h3, h4, h5, h6 { margin-top: 0; }
-a { text-decoration: none; }
-input { border-style: none; background: transparent; outline: none; }
-button { padding: 0; background: none; border: none; outline: none; }
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
 
-.header {
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  border-style: none;
+  background: transparent;
+  outline: none;
+}
+
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.headerContainer {
   width: 100%;
-  height: 100px;
+  padding: 15px 0 15px 0;
   display: flex;
   justify-content: center;
-  background-color:#3282B8;
+  background-color: $thirdColor;
+
+  .wrapper {
+    width: 95%;
+  }
 }
 
-.container {
+.mainContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 30px;
+
+  .wrapper {
+    width: 90%;
+
+    .tagsContainer {
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .addTagBtn {
+        height: auto;
+        margin-right: 5px;
+        padding: 5px;
+        border: 2px dashed $fourthColor;
+        border-radius: 10px;
+        color: $fourthColor;
+        margin-bottom: 5px;
+      }
+    }
+
+    .tasksContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+      grid-auto-rows: auto;
+      grid-auto-flow: dense;
+      gap: 1.5rem;
+    }
+  }
+
+  .empty {
+    @include card();
+    justify-content: center;
+  }
 }
+
+

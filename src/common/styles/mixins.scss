@@ -1,72 +1,19 @@
 @import "variables";
 
-@mixin buttonStyle () {
-  @keyframes gradient {
-    0% {
-      background-position: 0 0
-    }
-    100% {
-      background-position: 100% 0
-    }
-  }
+@mixin card () {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: sans-serif;
+  color: $mainColor;
+  background-color: $fourthColor;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 
-  .styleInput {
-    position: relative;
-    display: flex;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    border-radius: 2px;
-    padding: 0 15px 10px;
-
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 10;
-      height: 2px;
-      border-bottom-left-radius: 2px;
-      border-bottom-right-radius: 2px;
-      background-position: 0 0;
-      background: linear-gradient(to right, #37E2D5, #590696, #C70A80, #FBCB0A, #37E2D5, #590696);
-      background-size: 500% auto;
-      animation: gradient 3s linear infinite;
-    }
-
-    .input {
-      flex-grow: 1;
-      color: $secondaryColor;
-      font-size: 24px;
-      //line-height: 24px;
-      vertical-align: middle;
-
-      &::-webkit-input-placeholder {
-        color: $fourthColor;
-      }
-    }
-
-    .button {
-      color: $fourthColor;
-      font-size: 24px;
-      vertical-align: middle;
-      transition: color .25s;
-      margin-right: 6px;
-
-      &:hover {
-        color: $secondaryColor;
-      }
-    }
-    .tagsList {
-      position: absolute;
-      top: 37px;
-      left:0;
-      background-color: $fourthColor;
-      width: 100%;
-      color: $mainColor;
-      font-size: 20px;
-      line-height: 40px;
-    }
+  &:hover {
+    box-shadow: 2px 2px 16px rgba(187, 225, 250, 0.2);
   }
 }

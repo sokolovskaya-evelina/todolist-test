@@ -1,68 +1,64 @@
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import React, {useState} from 'react';
-import {TaskType} from "../../App";
-import styles from './Tasks.module.scss'
+import styles from "./Tasks.module.scss";
+import Tag from "../Tag/Tag";
+import Modal from "../../common/Modal/Modal";
+import {$store, deleteTask, storeType, updateTask} from "../../stateManagement/effector";
+import TaskEditorModal from "../../common/TaskEditorModal/TaskEditorModal";
 import {IconLookup} from "@fortawesome/fontawesome-svg-core";
-import {deleteTask, updateTaskText} from "../../stateManagement/effector";
-import Modal from "../../common/Modal";
+import {useStore} from "effector-react";
+import {TaskType} from "../../common/types";
+import Icon from "../../common/Icon";
 
+const trashIcon: IconLookup = {prefix: 'fas', iconName: 'trash'}
 
 interface ITask {
     task: TaskType
 }
 
-const trashIcon: IconLookup = {prefix: 'fas', iconName: 'trash'}
-const penIcon: IconLookup = {prefix: 'fas', iconName: 'pen'}
-const checkIcon: IconLookup = {prefix: 'fas', iconName: 'check'}
-const exitIcon: IconLookup = {prefix: 'fas', iconName: 'x'}
-const tagIcon: IconLookup = {prefix: 'fas', iconName: 'tag'}
+const Task:React.FC<ITask> = ({task}) => {
+    const tasks = useStore<storeType>($store).filteredTasks
+    const tags = useStore<storeType>($store).tags;
 
-
-const Task: React.FC<ITask> = ({task}) => {
-    const [isEditing, setIsEditing] = useState(false)
-    const [isOpenModal, setOpenModal] = useState(false)
-    const [text, setText] = useState<string>(task.text)
-
+    const [isOpenModal, setOpenModal] = useState(false);
+    const [isOpenEditorModal, setIsOpenEditorModal] = useState(false)
     return (
-        <div className={styles.taskCard}>
-            {isEditing
-                ? <input
-                    autoFocus={true}
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                />
-                : task.text}
-            <div>
-                {isEditing ? (<>
-                    <FontAwesomeIcon icon={exitIcon} color="#FF5151" onClick={() => {
-                        setText(task.text)
-                        setIsEditing(false)
-                    }}/>
-                    <FontAwesomeIcon className={styles.icon} icon={checkIcon} onClick={() => {
-                        if (task.text !== text) {
-                            updateTaskText({...task, text})
-                        }
-                        setIsEditing(false)
-                    }}/>
-                </>) : <FontAwesomeIcon icon={penIcon} onClick={() => {
-                    setIsEditing(true)
-                }}/>}
-                <FontAwesomeIcon icon={tagIcon} className={styles.icon}/>
-                <FontAwesomeIcon icon={trashIcon} color="#FF5151" className={styles.icon} onClick={() => setOpenModal(true)}/>
-                <Modal isOpenModal={isOpenModal} setOpenModal={setOpenModal}>
-                    <div className={styles.modalContainer}>
-                        Вы действительно хотите удалить задачу?
-                        <div className={styles.buttonContainer}>
-                            <button className={`${styles.btn} ${styles.yes}`} onClick={() => {
-                                deleteTask(task.id)
-                                setOpenModal(false)
-                            }}>Да</button>
-                            <button className={`${styles.btn} ${styles.no}`} onClick={() => setOpenModal(false)}>Нет</button>
-                        </div>
-                    </div>
-                </Modal>
+        <div
+            key={task.id}
+            onDoubleClick={()=>setIsOpenEditorModal(true)}
+            className={styles.taskCard}
+            style={{width: tasks.length === 1 ? '500px' : '100%'}}>
+            {task.text}
+            <div className={styles.taskTags}>
+                {task.tagIds.map((id: string) => <Tag key={id} tag={tags[id]}/>)}
             </div>
-
+            <div className={styles.taskSettings} onClick={() => setOpenModal(true)}>
+                <Icon icon={trashIcon}/>
+            </div>
+            {isOpenModal && <Modal isOpenModal={isOpenModal} setOpenModal={setOpenModal}>
+                <div className={styles.modalContainer}>
+                    Вы действительно хотите удалить задачу?
+                    <div className={styles.buttonContainer}>
+                        <button className={`${styles.btn} ${styles.yes}`} onClick={() => {
+                            deleteTask(task.id)
+                            setOpenModal(false)
+                        }}>Да
+                        </button>
+                        <button className={`${styles.btn} ${styles.no}`}
+                                onClick={() => setOpenModal(false)}>Нет
+                        </button>
+                    </div>
+                </div>
+            </Modal>}
+            {isOpenEditorModal && <TaskEditorModal
+                title="Редактор задачи"
+                isOpenModal={isOpenEditorModal}
+                setIsOpenModal={setIsOpenEditorModal}
+                task={task}
+                onSave={(task) => {
+                    updateTask(task)
+                    setIsOpenEditorModal(false)
+                }}
+            />}
         </div>
     );
 };

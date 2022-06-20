@@ -1,4 +1,4 @@
-@import "./styles/variables";
+@import "../styles/variables";
 
 .modal {
   width: 100vw;
@@ -25,7 +25,8 @@
     border-radius: 12px;
     background-color: $fourthColor;
     width: 50vw;
-    transform: scale(0.5);
+    max-height: 500px;
+    overflow: auto;    transform: scale(0.5);
     transition: 0.4s all;
 
     &.active {

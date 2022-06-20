@@ -9,9 +9,13 @@ interface IModal {
 
 const Modal: React.FC<IModal> = ({setOpenModal, isOpenModal, children}) => {
     return (
-        <div className={isOpenModal ? `${styles.modal} ${styles.active}` : styles.modal} onClick={()=> setOpenModal(false)}>
-            <div onClick={e=> e.stopPropagation()}
-                 className={isOpenModal ? `${styles.modalContent} ${styles.active}` : styles.modalContent}
+        <div
+            className={isOpenModal ? `${styles.modal} ${styles.active}` : styles.modal}
+            onClick={() => setOpenModal(false)}
+        >
+            <div
+                onClick={e => e.stopPropagation()}
+                className={isOpenModal ? `${styles.modalContent} ${styles.active}` : styles.modalContent}
             >
                 {children}
             </div>

@@ -1,17 +1,16 @@
 import React from 'react';
-import {TaskType} from "../../App";
+import {$store, storeType} from "../../stateManagement/effector";
+import {useStore} from "effector-react";
 import Task from "./Task";
-import styles from './Tasks.module.scss'
 
-interface ITasks {
-    tasks: Array<TaskType>
-}
 
-const Tasks: React.FC<ITasks> = ({tasks}) => {
+const Tasks = () => {
+    const tasks = useStore<storeType>($store).filteredTasks
+
     return (
-        <div className={styles.wrapper}>
-            {tasks.map((task) => <Task key={task.id} task={task}/>)}
-        </div>
+        <>
+            {tasks.map((task => <Task key={task.id} task={task}/>))}
+        </>
     );
 };
 
