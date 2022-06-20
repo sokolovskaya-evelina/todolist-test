@@ -10,12 +10,13 @@ import {TaskType} from "../../common/types";
 import Icon from "../../common/Icon";
 
 const trashIcon: IconLookup = {prefix: 'fas', iconName: 'trash'}
+const penIcon: IconLookup = {prefix: 'fas', iconName: 'pen'}
 
 interface ITask {
     task: TaskType
 }
 
-const Task:React.FC<ITask> = ({task}) => {
+const Task: React.FC<ITask> = ({task}) => {
     const tasks = useStore<storeType>($store).filteredTasks
     const tags = useStore<storeType>($store).tags;
 
@@ -24,15 +25,19 @@ const Task:React.FC<ITask> = ({task}) => {
     return (
         <div
             key={task.id}
-            onDoubleClick={()=>setIsOpenEditorModal(true)}
             className={styles.taskCard}
             style={{width: tasks.length === 1 ? '500px' : '100%'}}>
             {task.text}
             <div className={styles.taskTags}>
                 {task.tagIds.map((id: string) => <Tag key={id} tag={tags[id]}/>)}
             </div>
-            <div className={styles.taskSettings} onClick={() => setOpenModal(true)}>
-                <Icon icon={trashIcon}/>
+            <div className={styles.taskSettings}>
+                <button onClick={() => setIsOpenEditorModal(true)}>
+                    <Icon icon={penIcon}/>
+                </button>
+                <button onClick={() => setOpenModal(true)}>
+                    <Icon icon={trashIcon}/>
+                </button>
             </div>
             {isOpenModal && <Modal isOpenModal={isOpenModal} setOpenModal={setOpenModal}>
                 <div className={styles.modalContainer}>

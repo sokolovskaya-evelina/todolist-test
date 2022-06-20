@@ -27,8 +27,8 @@ const TaskEditorModal: React.FC<ITaskEditorModal> = ({task, setIsOpenModal, isOp
     const getTagIds = () => {
         if (currentTask.tagIds.includes(WITHOUT_TAGS) && currentTask.tagIds.length === 1) return [WITHOUT_TAGS]
         if (currentTask.tagIds.length === 0) return [WITHOUT_TAGS]
-        if (currentTask.tagIds.length > 1 && currentTask.tagIds.includes(WITHOUT_TAGS)) return [...currentTask.tagIds].filter(id => id !== WITHOUT_TAGS)
-        if (currentTask.tagIds.length > 0 && !currentTask.tagIds.includes(WITHOUT_TAGS)) return [...currentTask.tagIds]
+        if (currentTask.tagIds.length > 1 && currentTask.tagIds.includes(WITHOUT_TAGS)) return Array.from(new Set([...currentTask.tagIds].filter(id => id !== WITHOUT_TAGS)))
+        if (currentTask.tagIds.length > 0 && !currentTask.tagIds.includes(WITHOUT_TAGS)) return Array.from(new Set([...currentTask.tagIds]))
         return []
     }
 
@@ -52,7 +52,7 @@ const TaskEditorModal: React.FC<ITaskEditorModal> = ({task, setIsOpenModal, isOp
 
             <div className={styles.selectedTagsContainer}>
                 Выбранные теги:
-                {currentTask.tagIds.map(id =>
+                {Array.from(new Set(currentTask.tagIds)).map(id =>
                     <Tag
                         key={id}
                         onDeleteTag={(tagId) => setCurrentTask(prevState => ({

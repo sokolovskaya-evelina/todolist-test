@@ -16,7 +16,9 @@
   }
 
   .taskSettings {
-    align-self: self-end;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .modalContainer {
