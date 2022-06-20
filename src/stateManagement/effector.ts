@@ -1,7 +1,7 @@
 import {createEvent, createStore} from "effector";
 import {v1} from "uuid";
 import {TagType, TaskType} from "../common/types";
-import {ALL, WITHOUT_TAGS} from "../common/constants";
+import {ALL} from "../common/constants";
 
 export type storeType = {
     tasks: Array<TaskType>
@@ -41,19 +41,19 @@ export const searchByTagName = createEvent<string>()
 
 export const $store = createStore<storeType>({
     tasks: [
-        {id: v1(), text: 'Задача 1', tagIds: [WITHOUT_TAGS]},
-        {id: v1(), text: 'Задача 2', tagIds: [WITHOUT_TAGS]},
-        {id: v1(), text: 'Задача 3', tagIds: [WITHOUT_TAGS]}
+        {id: v1(), text: 'Задача 1', tagIds: ['1']},
+        {id: v1(), text: 'Задача 2', tagIds: ['2']},
+        {id: v1(), text: 'Задача 3', tagIds: ['3']}
     ],
     tags: {
-        '1': {id: v1(), name: 'К выполнению', color: '#FF8AAE'},
-        '2': {id: v1(), name: 'В работе', color: '#FBF46D'},
-        '3': {id: v1(), name: 'Готово', color: '#B4FE98'},
+        '1': {id: '1', name: 'К выполнению', color: '#FF8AAE'},
+        '2': {id: '2', name: 'В работе', color: '#FBF46D'},
+        '3': {id: '3', name: 'Готово', color: '#B4FE98'},
     },
     filteredTasks: [
-        {id: v1(), text: 'Задача 1', tagIds: [WITHOUT_TAGS]},
-        {id: v1(), text: 'Задача 2', tagIds: [WITHOUT_TAGS]},
-        {id: v1(), text: 'Задача 3', tagIds: [WITHOUT_TAGS]}
+        {id: v1(), text: 'Задача 1', tagIds: ['1']},
+        {id: v1(), text: 'Задача 2', tagIds: ['2']},
+        {id: v1(), text: 'Задача 3', tagIds: ['3']}
     ],
     selectedTagsIds: [ALL]
 })
